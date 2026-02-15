@@ -1,4 +1,7 @@
 const SHEET_NAME = "Responses";
+// Optional: set this when using standalone Apps Script.
+// Spreadsheet URL format: https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID>/edit
+const SPREADSHEET_ID = "";
 
 function doPost(e) {
   try {
@@ -55,12 +58,26 @@ function doPost(e) {
 }
 
 function getOrCreateSheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = getSpreadsheet_();
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
   }
   return sheet;
+}
+
+function getSpreadsheet_() {
+  if (SPREADSHEET_ID && SPREADSHEET_ID.trim()) {
+    return SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+  }
+
+  const active = SpreadsheetApp.getActiveSpreadsheet();
+  if (!active) {
+    throw new Error(
+      "No active spreadsheet found. Set SPREADSHEET_ID in script for standalone deployments."
+    );
+  }
+  return active;
 }
 
 function valueOrDash_(v) {

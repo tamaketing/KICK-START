@@ -214,15 +214,27 @@
                     headers: { "Content-Type": "text/plain;charset=utf-8" }
                 });
 
+                const text = await response.text();
+                let result = null;
+                try {
+                    result = JSON.parse(text);
+                } catch (parseError) {
+                    result = null;
+                }
+
                 if (!response.ok) {
                     throw new Error("HTTP " + response.status);
+                }
+
+                if (result && result.ok === false) {
+                    throw new Error(result.error || "Apps Script returned ok=false");
                 }
 
                 submitMsg.textContent = "ส่งข้อมูลสำเร็จแล้ว";
                 submitMsg.className = "text-green-700 text-sm mt-2";
                 this.reset();
             } catch (error) {
-                submitMsg.textContent = "ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบ SCRIPT_URL และการ Deploy Web App";
+                submitMsg.textContent = "ส่งข้อมูลไม่สำเร็จ: " + (error && error.message ? error.message : "กรุณาตรวจสอบ SCRIPT_URL และการ Deploy Web App");
                 submitMsg.className = "text-red-600 text-sm mt-2";
             }
         });
