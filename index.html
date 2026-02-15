@@ -38,8 +38,8 @@
                 </div>
 
                 <div class="input-group">
-                    <label class="input-label">1. Facebook Page Link</label>
-                    <input type="url" id="fbLink" class="text-input" placeholder="https://facebook.com/..." required>
+                    <label class="input-label">1. Facebook Page</label>
+                    <p class="text-sm text-gray-700 break-all">https://www.facebook.com/Kickstart.fc2014?locale=th_TH</p>
                 </div>
 
                 <div class="input-group">
@@ -141,14 +141,9 @@
             </div>
 
             <div class="bg-gray-100 p-6 rounded-lg text-center">
-                <button type="button" onclick="generateSummary()" class="btn-primary mb-3">
-                    <i class="fas fa-file-alt mr-2"></i> สรุปข้อมูลเพื่อส่งต่อ
-                </button>
                 <button type="submit" class="btn-secondary mb-4">
-                    <i class="fas fa-paper-plane mr-2"></i> ส่งข้อมูลเข้า Google Sheets
+                    <i class="fas fa-paper-plane mr-2"></i> ส่งข้อมูล
                 </button>
-                <textarea id="resultArea" class="w-full p-4 border rounded-md text-sm text-gray-600 hidden" rows="10" readonly></textarea>
-                <p id="copyMsg" class="text-green-600 text-sm mt-2 hidden"></p>
                 <p id="submitMsg" class="text-blue-700 text-sm mt-2 hidden"></p>
             </div>
         </form>
@@ -159,7 +154,7 @@
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCgRh7nCuLsCmYvkg23tWUnUYaSpQi_if831m0gbV8AgXSjlsLhXRtZCyyhOxHZ-Jv/exec";
 
         function collectFormData() {
-            const fbLink = document.getElementById("fbLink").value || "-";
+            const fbLink = "https://www.facebook.com/Kickstart.fc2014?locale=th_TH";
             const access = Array.from(document.querySelectorAll("#accessPage:checked, #accessAds:checked")).map((el) => el.value).join(", ") || "-";
             const adAccount = document.querySelector('input[name="adAccount"]:checked')?.value || "-";
             const lineId = document.getElementById("lineId").value || "-";
@@ -194,69 +189,6 @@
                 timeSlot,
                 budget
             };
-        }
-
-        async function copyToClipboard(text) {
-            if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(text);
-                return true;
-            }
-
-            const temp = document.createElement("textarea");
-            temp.value = text;
-            temp.style.position = "fixed";
-            temp.style.left = "-9999px";
-            document.body.appendChild(temp);
-            temp.focus();
-            temp.select();
-            const success = document.execCommand("copy");
-            document.body.removeChild(temp);
-            return success;
-        }
-
-        async function generateSummary() {
-            const data = collectFormData();
-            const text = `
-📌 สรุปข้อมูล KICK START Football CLUB
-------------------------------------
-1. Digital Assets
-- FB Link: ${data.fbLink}
-- Access: ${data.access}
-- Ad Account: ${data.adAccount}
-- Line ID: ${data.lineId}
-- Line Admin: ${data.hasAdmin}
-
-2. สถิติปัจจุบัน (ต่อสัปดาห์)
-- ทักแชท: ${data.inbox} คน
-- จองเรียน: ${data.booking} คน
-- สมัครจริง: ${data.signup} คน
-- สาเหตุที่ไม่สมัคร: ${data.fullReason}
-
-3. กลุ่มเป้าหมาย
-- ทำเล/รร.: ${data.location}
-- คนตัดสินใจ: ${data.decision}
-
-4. ความต้องการ
-- เวลาที่อยากได้เด็กเพิ่ม: ${data.timeSlot}
-- งบโฆษณา: ${data.budget}
-------------------------------------
-Date: ${new Date().toLocaleDateString("th-TH")}
-            `.trim();
-
-            const resultArea = document.getElementById("resultArea");
-            const copyMsg = document.getElementById("copyMsg");
-            resultArea.value = text;
-            resultArea.classList.remove("hidden");
-
-            try {
-                await copyToClipboard(text);
-                copyMsg.textContent = "คัดลอกข้อมูลเรียบร้อย! นำไปวางใน Line หรือ Email ได้เลย";
-            } catch (err) {
-                copyMsg.textContent = "คัดลอกอัตโนมัติไม่สำเร็จ กรุณาคัดลอกจากกล่องข้อความด้านบน";
-            }
-
-            copyMsg.classList.remove("hidden");
-            setTimeout(() => copyMsg.classList.add("hidden"), 3000);
         }
 
         document.getElementById("onboardingForm").addEventListener("submit", async function (event) {
