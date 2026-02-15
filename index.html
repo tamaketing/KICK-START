@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KICK START FC - Client Onboarding Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Sarabun', sans-serif; background-color: #F3F4F6; }
+        .section-header { border-bottom: 2px solid #E5E7EB; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-label { display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem; }
+        .text-input { width: 100%; padding: 0.75rem; border: 1px solid #D1D5DB; border-radius: 0.5rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .text-input:focus { border-color: #2563EB; box-shadow: 0 0 0 2px #bfdbfe; }
+        .checkbox-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .checkbox-item { display: flex; align-items: center; gap: 0.5rem; color: #4B5563; }
+        .btn-primary { background-color: #002D62; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; width: 100%; text-align: center; border: none; }
+        .btn-primary:hover { background-color: #001E42; }
+        .btn-secondary { background-color: #16a34a; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; width: 100%; text-align: center; border: none; }
+        .btn-secondary:hover { background-color: #15803d; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="bg-[#002D62] p-6 text-white text-center">
+            <h1 class="text-2xl font-bold mb-2">แบบฟอร์มขอข้อมูลวางแผนการตลาด</h1>
+            <p class="text-[#A4C639] font-semibold">Client: KICK START Football CLUB</p>
+        </div>
+
+        <form id="onboardingForm" class="p-6 md:p-10">
+            <div class="mb-10">
+                <div class="section-header">
+                    <h2 class="text-xl font-bold text-gray-800">ส่วนที่ 1: ข้อมูลสินทรัพย์ดิจิทัล</h2>
+                    <p class="text-sm text-gray-500">เพื่อให้ทีมงานเข้าถึงข้อมูลและติดตั้งเครื่องมือวัดผลได้</p>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">1. Facebook Page Link</label>
+                    <input type="url" id="fbLink" class="text-input" placeholder="https://facebook.com/..." required>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">2. สิทธิ์การเข้าถึง (Access)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" id="accessPage" value="Page Admin"> สะดวกให้สิทธิ์ Admin/Editor บนเพจ</label>
+                        <label class="checkbox-item"><input type="checkbox" id="accessAds" value="Ads Manager"> สะดวกให้สิทธิ์ใน Business Manager (ยิงแอด)</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">3. บัญชีโฆษณา (Ad Account)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="radio" name="adAccount" value="มีแล้ว"> มีบัญชีโฆษณาอยู่แล้ว</label>
+                        <label class="checkbox-item"><input type="radio" name="adAccount" value="ไม่มี"> ยังไม่เคยมี (ต้องการให้สร้างใหม่)</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">4. Line Official Account (ID)</label>
+                    <input type="text" id="lineId" class="text-input" placeholder="@kickstart...">
+                    <div class="mt-2">
+                         <label class="checkbox-item"><input type="checkbox" id="hasAdmin" value="มีแอดมินตอบ"> มีแอดมินตอบประจำ</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <div class="section-header">
+                    <h2 class="text-xl font-bold text-gray-800">ส่วนที่ 2: สถิติปัจจุบัน (Performance)</h2>
+                    <p class="text-sm text-gray-500">เป้าหมาย: เพิ่มนักเรียน 20-30 คน</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 input-group">
+                    <div>
+                        <label class="input-label text-sm">คนทัก Inbox / สัปดาห์</label>
+                        <input type="number" id="inboxCount" class="text-input" placeholder="0">
+                    </div>
+                    <div>
+                        <label class="input-label text-sm">คนจองทดลองเรียน / สัปดาห์</label>
+                        <input type="number" id="bookingCount" class="text-input" placeholder="0">
+                    </div>
+                    <div>
+                        <label class="input-label text-sm">คนสมัครจริง / สัปดาห์</label>
+                        <input type="number" id="signupCount" class="text-input" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">6. สาเหตุที่ลูกค้าไม่สมัคร (เท่าที่ทราบ)</label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <label class="checkbox-item"><input type="checkbox" name="reason" value="ราคาแพง"> ราคาแพงเกินไป</label>
+                        <label class="checkbox-item"><input type="checkbox" name="reason" value="เดินทางยาก"> บ้านไกล / เดินทางยาก</label>
+                        <label class="checkbox-item"><input type="checkbox" name="reason" value="เวลาไม่ตรง"> เวลาเรียนไม่ตรง</label>
+                        <label class="checkbox-item"><input type="checkbox" name="reason" value="ลูกไม่ชอบ"> ลูกยังไม่พร้อม/ไม่ชอบ</label>
+                    </div>
+                    <input type="text" id="otherReason" class="text-input mt-2" placeholder="สาเหตุอื่นๆ...">
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <div class="section-header">
+                    <h2 class="text-xl font-bold text-gray-800">ส่วนที่ 3: กลุ่มเป้าหมาย (Target)</h2>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">8. โรงเรียน/หมู่บ้าน ของเด็กปัจจุบัน (ขอ 3 อันดับแรก)</label>
+                    <textarea id="locationTarget" class="text-input" rows="3" placeholder="เช่น รร.สวนกุหลาบรังสิต, หมู่บ้านมัณฑนา..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">9. ผู้ปกครองที่เป็นคนตัดสินใจหลัก</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="radio" name="decisionMaker" value="แม่"> คุณแม่ (เน้นความปลอดภัย/สังคม)</label>
+                        <label class="checkbox-item"><input type="radio" name="decisionMaker" value="พ่อ"> คุณพ่อ (เน้นทักษะ/โค้ช)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-10">
+                <div class="section-header">
+                    <h2 class="text-xl font-bold text-gray-800">ส่วนที่ 4: ความพร้อม & งบประมาณ</h2>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">12. ช่วงเวลาที่อยากได้เด็กเพิ่มที่สุด</label>
+                    <input type="text" id="timeSlot" class="text-input" placeholder="เช่น เสาร์เช้า, อาทิตย์บ่าย">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">14. งบประมาณโฆษณา (ต่อเดือน)</label>
+                    <select id="budget" class="text-input">
+                        <option value="">-- กรุณาเลือก --</option>
+                        <option value="5,000 - 10,000 บาท">5,000 - 10,000 บาท</option>
+                        <option value="10,001 - 20,000 บาท">10,001 - 20,000 บาท</option>
+                        <option value="20,000 บาทขึ้นไป">20,000 บาทขึ้นไป</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 p-6 rounded-lg text-center">
+                <button type="button" onclick="generateSummary()" class="btn-primary mb-3">
+                    <i class="fas fa-file-alt mr-2"></i> สรุปข้อมูลเพื่อส่งต่อ
+                </button>
+                <button type="submit" class="btn-secondary mb-4">
+                    <i class="fas fa-paper-plane mr-2"></i> ส่งข้อมูลเข้า Google Sheets
+                </button>
+                <textarea id="resultArea" class="w-full p-4 border rounded-md text-sm text-gray-600 hidden" rows="10" readonly></textarea>
+                <p id="copyMsg" class="text-green-600 text-sm mt-2 hidden"></p>
+                <p id="submitMsg" class="text-blue-700 text-sm mt-2 hidden"></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // วาง URL จาก Google Apps Script Web App ที่ Deploy แล้ว
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxCgRh7nCuLsCmYvkg23tWUnUYaSpQi_if831m0gbV8AgXSjlsLhXRtZCyyhOxHZ-Jv/exec";
+
+        function collectFormData() {
+            const fbLink = document.getElementById("fbLink").value || "-";
+            const access = Array.from(document.querySelectorAll("#accessPage:checked, #accessAds:checked")).map((el) => el.value).join(", ") || "-";
+            const adAccount = document.querySelector('input[name="adAccount"]:checked')?.value || "-";
+            const lineId = document.getElementById("lineId").value || "-";
+            const hasAdmin = document.getElementById("hasAdmin").checked ? "มีแอดมินตอบประจำ" : "ไม่มี/ไม่ระบุ";
+
+            const inbox = document.getElementById("inboxCount").value || "0";
+            const booking = document.getElementById("bookingCount").value || "0";
+            const signup = document.getElementById("signupCount").value || "0";
+
+            const reasons = Array.from(document.querySelectorAll('input[name="reason"]:checked')).map((el) => el.value).join(", ");
+            const otherReason = document.getElementById("otherReason").value.trim();
+            const fullReason = [reasons, otherReason].filter(Boolean).join(", ") || "-";
+
+            const location = document.getElementById("locationTarget").value || "-";
+            const decision = document.querySelector('input[name="decisionMaker"]:checked')?.value || "-";
+            const timeSlot = document.getElementById("timeSlot").value || "-";
+            const budget = document.getElementById("budget").value || "-";
+
+            return {
+                submittedAt: new Date().toISOString(),
+                fbLink,
+                access,
+                adAccount,
+                lineId,
+                hasAdmin,
+                inbox,
+                booking,
+                signup,
+                fullReason,
+                location,
+                decision,
+                timeSlot,
+                budget
+            };
+        }
+
+        async function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return true;
+            }
+
+            const temp = document.createElement("textarea");
+            temp.value = text;
+            temp.style.position = "fixed";
+            temp.style.left = "-9999px";
+            document.body.appendChild(temp);
+            temp.focus();
+            temp.select();
+            const success = document.execCommand("copy");
+            document.body.removeChild(temp);
+            return success;
+        }
+
+        async function generateSummary() {
+            const data = collectFormData();
+            const text = `
+📌 สรุปข้อมูล KICK START Football CLUB
+------------------------------------
+1. Digital Assets
+- FB Link: ${data.fbLink}
+- Access: ${data.access}
+- Ad Account: ${data.adAccount}
+- Line ID: ${data.lineId}
+- Line Admin: ${data.hasAdmin}
+
+2. สถิติปัจจุบัน (ต่อสัปดาห์)
+- ทักแชท: ${data.inbox} คน
+- จองเรียน: ${data.booking} คน
+- สมัครจริง: ${data.signup} คน
+- สาเหตุที่ไม่สมัคร: ${data.fullReason}
+
+3. กลุ่มเป้าหมาย
+- ทำเล/รร.: ${data.location}
+- คนตัดสินใจ: ${data.decision}
+
+4. ความต้องการ
+- เวลาที่อยากได้เด็กเพิ่ม: ${data.timeSlot}
+- งบโฆษณา: ${data.budget}
+------------------------------------
+Date: ${new Date().toLocaleDateString("th-TH")}
+            `.trim();
+
+            const resultArea = document.getElementById("resultArea");
+            const copyMsg = document.getElementById("copyMsg");
+            resultArea.value = text;
+            resultArea.classList.remove("hidden");
+
+            try {
+                await copyToClipboard(text);
+                copyMsg.textContent = "คัดลอกข้อมูลเรียบร้อย! นำไปวางใน Line หรือ Email ได้เลย";
+            } catch (err) {
+                copyMsg.textContent = "คัดลอกอัตโนมัติไม่สำเร็จ กรุณาคัดลอกจากกล่องข้อความด้านบน";
+            }
+
+            copyMsg.classList.remove("hidden");
+            setTimeout(() => copyMsg.classList.add("hidden"), 3000);
+        }
+
+        document.getElementById("onboardingForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const submitMsg = document.getElementById("submitMsg");
+            submitMsg.classList.remove("hidden");
+
+            if (!SCRIPT_URL || SCRIPT_URL.includes("PASTE_YOUR")) {
+                submitMsg.textContent = "กรุณาใส่ SCRIPT_URL ก่อนใช้งาน";
+                submitMsg.className = "text-red-600 text-sm mt-2";
+                return;
+            }
+
+            const payload = collectFormData();
+            submitMsg.textContent = "กำลังส่งข้อมูล...";
+            submitMsg.className = "text-blue-700 text-sm mt-2";
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify(payload),
+                    headers: { "Content-Type": "text/plain;charset=utf-8" }
+                });
+
+                if (!response.ok) {
+                    throw new Error("HTTP " + response.status);
+                }
+
+                submitMsg.textContent = "ส่งข้อมูลสำเร็จแล้ว";
+                submitMsg.className = "text-green-700 text-sm mt-2";
+                this.reset();
+            } catch (error) {
+                submitMsg.textContent = "ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบ SCRIPT_URL และการ Deploy Web App";
+                submitMsg.className = "text-red-600 text-sm mt-2";
+            }
+        });
+    </script>
+</body>
+</html>
